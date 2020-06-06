@@ -18,7 +18,7 @@ class Directory(BaseAPIClass):
         url = f'account/{account_id}/vacancy/statuses'
         return self.requester.request(url)
 
-    def sources(self, account_id: str) -> Dict[str, List[Dict[str, Union[str, int]]]]:        
+    def sources(self, account_id: str) -> Dict[str, List[Dict[str, Union[str, int]]]]:
         """ Получить список источников резюме.
 
         https://github.com/huntflow/api/blob/master/ru/dicts.md#источники-резюме

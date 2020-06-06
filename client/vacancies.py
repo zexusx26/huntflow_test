@@ -37,4 +37,3 @@ class Vacancies(BaseAPIClass):
         if opened:
             body['opened'] = True
         return self.requester.request(url, body=body, count=count, page=page)
-

@@ -1,7 +1,7 @@
 import re
 import unicodedata
 from abc import ABCMeta, abstractmethod
-from typing import Tuple, Union, Any, Dict
+from typing import Union, Any, Dict
 
 
 def normalize(string: str) -> str:
@@ -57,6 +57,7 @@ class StringField(Field):
             return normalize(str(value))
         return None
 
+
 class SeparatedIntegerField(StringField):
     """ Поле для получения целого числа из строки. Число может быть разделено пробельными символами, при этом они будут
     игнорироваться. Возвращает первое такое число. """
@@ -85,7 +86,7 @@ class Salary(SeparatedIntegerField):
         """
         super().__init__(name)
         self.currency = currency
-    
+
     def _parse(self, value):
         value = super()._parse(value)
         if value is not None:
@@ -123,7 +124,7 @@ class StatsField(StringField):
 
 
 class FullNameField(StringField):
-    """ Поле для извлечения полного имени. Имя поля игнорируется. Формируется словарь из двух (если отчество 
+    """ Поле для извлечения полного имени. Имя поля игнорируется. Формируется словарь из двух (если отчество
     отсутствует) или из трех полей (если отчество есть) с ключами "last_name", "first_name" и "middle_name". """
 
     def parse(self, value):

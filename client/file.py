@@ -1,6 +1,5 @@
 import json
 import subprocess
-from os import path
 from typing import Dict, List, Union
 from urllib import parse as urllib_parse
 

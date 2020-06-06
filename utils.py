@@ -1,6 +1,5 @@
 from typing import Union
 
-import json
 import os
 
 from reader import normalize
@@ -72,7 +71,7 @@ def update_applicant_from_resume(applicant: dict, resume: dict):
             'body': resume['text']
         }
 
-    # разбираемся с данными о кандидате, которые получены из резюме 
+    # разбираемся с данными о кандидате, которые получены из резюме
     applicant_data = resume.get('fields')
     if applicant_data:
 

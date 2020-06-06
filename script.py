@@ -36,7 +36,7 @@ handler.setFormatter(formatter)
 handler.setLevel(DEBUG)
 logger.addHandler(handler)
 
-logger.debug(f'Логгер инициализирован. Загружаю конфигурации, инициализирую чтеца БД и клиента АПИ.')
+logger.debug('Логгер инициализирован. Загружаю конфигурации, инициализирую чтеца БД и клиента АПИ.')
 
 # загрузка конфига
 CFG_FP = 'config.json'
@@ -58,7 +58,7 @@ client = Client(args.token, config['api_endpoint'])
 # ПОЛУЧЕНИЕ ДАННЫХ С СЕРВЕРА #
 ##############################
 
-logger.debug(f'Получаю нужные данные с сервера.')
+logger.debug('Получаю нужные данные с сервера.')
 
 # идентификатор организации
 account_id = client.user.accounts()['items'][0]['id']
@@ -80,7 +80,7 @@ else:
     row_number = 1
 
 # основной скрипт
-logger.debug(f'Начинаю работу с кандидатами.')
+logger.debug('Начинаю работу с кандидатами.')
 try:
     with reader.open(args.database_path):
 
@@ -90,22 +90,22 @@ try:
             logger.debug(f'Работа с кандидатом №{row_number}.')
             candidate = reader.read_row(row_number)
             if not candidate:
-                logger.info(f'Данные о кандидате не получены, похоже, все кандидаты загружены. Завершаю работу.')
+                logger.info('Данные о кандидате не получены, похоже, все кандидаты загружены. Завершаю работу.')
                 break
-            logger.debug(f'Из БД получены данные о кандидате.')
+            logger.debug('Из БД получены данные о кандидате.')
 
             # получаем вакансии и статус
             vacancy = vacancies.get(candidate['vacancy'])
             if vacancy is None:
                 logger.warning('Ошибка при опеределении вакансии кандидата, кандидат не будет зарегистрирован на вакансию.')
             else:
-                logger.debug(f'Получены данные о вакансии кандидата.')
+                logger.debug('Получены данные о вакансии кандидата.')
 
             status = statuses.get(candidate['status'])
             if status is None:
                 logger.warning('Ошибка при опеределении статуса кандидата, кандидат не будет зарегистрирован на вакансию.')
             else:
-                logger.debug(f'Получены данные о статусе кандидата.')
+                logger.debug('Получены данные о статусе кандидата.')
 
             # создаем словарь персональных данных
             applicant = {
@@ -115,7 +115,7 @@ try:
             }
             if 'middle_name' in candidate:
                 applicant['middle_name'] = candidate['middle_name']
-            
+
             # получаем файл с резюме и загружаем (запрашиваем парсинг)
             resume_fp = find_resume(
                 base_path,
@@ -129,14 +129,14 @@ try:
                 resume = {}
             else:
                 resume = client.file.upload(account_id, resume_fp)
-                logger.debug(f'Загружено резюме кандидата.')
+                logger.debug('Загружено резюме кандидата.')
 
             # обновляем данные кандидата из БД данными из резюме
             update_applicant_from_resume(applicant, resume)
 
             # добавляем кандидата в базу
             applicant = client.applicants.add(account_id, **applicant)
-            logger.debug(f'Кандидат добавлен на сервер.')
+            logger.debug('Кандидат добавлен на сервер.')
 
             if status and vacancy:
 
@@ -149,7 +149,7 @@ try:
                 }
                 request = client.applicants.add_to_vacancy(account_id, applicant['id'], **applicant_to_vacancy_data)
                 logger.debug(f'Кандидат зарегистрирован на вакансию.')
-            
+
             row_number += 1
 
 # запоминаем строку, на которой остановились

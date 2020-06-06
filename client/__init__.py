@@ -26,7 +26,7 @@ class Client:
     @property
     def vacancies(self) -> Vacancies:
         """ Свойство для методов работы с вакансиями.
-        
+
         https://github.com/huntflow/api/blob/master/ru/vacancies.md
         """
         if self._vacancies is None:
