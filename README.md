@@ -37,8 +37,8 @@ python3 script.py <token> <database_path>
 
 Здесь `token`&nbsp;&mdash; индивидуальный токен авторизации, `database_path`&nbsp;&mdash; путь до загружаемой базы.
 
-Например, для загрузки тестовой базы данных и для токена `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa` выполните из корня проекта:
+Например, для загрузки тестовой базы данных и для токена `token` выполните из корня проекта:
 
 ```bash
-python3 script.py aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa './data/Тестовая база.xlsx'
+python3 script.py token './data/Тестовая база.xlsx'
 ```
